@@ -78,7 +78,7 @@ export const Scene09Outro: React.FC = () => {
           boxShadow: `0 ${ctaGlow + 12}px ${ctaGlow + 24}px ${tokens.saffron}44`,
         }}
       >
-        Bientôt sur iOS + Android
+        let-me-cook-v1.vercel.app
       </div>
     </StoryLayout>
   );
