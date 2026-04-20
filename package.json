@@ -1,0 +1,26 @@
+{
+  "name": "let-me-cook-story",
+  "version": "0.1.0",
+  "description": "Remotion · story 45s qui montre le parcours complet de Let Me Cook",
+  "author": "Adam Beloucif <adam@beloucif.com>",
+  "private": true,
+  "scripts": {
+    "start": "remotion studio",
+    "render": "remotion render story out/let-me-cook-story.mp4",
+    "render:square": "remotion render story-square out/let-me-cook-square.mp4",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/bundler": "4.0.448",
+    "@remotion/cli": "4.0.448",
+    "@remotion/google-fonts": "4.0.448",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "remotion": "4.0.448"
+  },
+  "devDependencies": {
+    "@types/react": "19.0.0",
+    "@types/react-dom": "19.0.0",
+    "typescript": "5.8.2"
+  }
+}
