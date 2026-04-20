@@ -1,8 +1,9 @@
-// Scène 05 · la recette apparaît · ingrédients s'énumèrent
+// Scène 05 · recette hero avec vraie photo carbonara · ingrédients cascade
 import React from 'react';
-import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
+import { AbsoluteFill, Img, interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
 import { tokens } from '../tokens';
 import { fontFamily } from '../fonts';
+import { foodPhotos } from '../food';
 
 const INGREDIENTS = [
   { q: '200', u: 'g', name: 'spaghetti' },
@@ -17,9 +18,9 @@ export const Scene05Recipe: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const heroScale = spring({ frame, fps, config: { damping: 12 } });
-  const titleOp = interpolate(frame, [10, 30], [0, 1], { extrapolateRight: 'clamp' });
-  const kcalOp = interpolate(frame, [20, 40], [0, 1], { extrapolateRight: 'clamp' });
+  const heroScale = spring({ frame, fps, config: { damping: 12 }, durationInFrames: 25 });
+  const titleOp = interpolate(frame, [5, 20], [0, 1], { extrapolateRight: 'clamp' });
+  const kcalOp = interpolate(frame, [15, 30], [0, 1], { extrapolateRight: 'clamp' });
 
   return (
     <AbsoluteFill style={{ background: tokens.cream, flexDirection: 'column' }}>
@@ -27,12 +28,21 @@ export const Scene05Recipe: React.FC = () => {
       <div
         style={{
           height: 900,
-          background: `linear-gradient(135deg, ${tokens.creamSoft}, ${tokens.cream})`,
           position: 'relative',
+          overflow: 'hidden',
           transform: `scale(${heroScale})`,
           transformOrigin: 'top',
         }}
       >
+        <Img src={foodPhotos.carbonara} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(180deg, rgba(0,0,0,0.25) 0%, transparent 30%, transparent 55%, rgba(0,0,0,0.65) 100%)',
+          }}
+        />
+
         <div
           style={{
             position: 'absolute',
@@ -40,7 +50,7 @@ export const Scene05Recipe: React.FC = () => {
             left: 60,
             fontFamily: fontFamily.mono,
             fontSize: 22,
-            color: tokens.saffron,
+            color: tokens.saffronSoft,
             letterSpacing: 3,
           }}
         >
@@ -52,9 +62,10 @@ export const Scene05Recipe: React.FC = () => {
             style={{
               fontFamily: fontFamily.serifItalic,
               fontSize: 130,
-              color: tokens.ink,
+              color: tokens.cream,
               letterSpacing: -2,
               lineHeight: 1,
+              textShadow: '0 4px 30px rgba(0,0,0,0.4)',
             }}
           >
             Carbonara crémeuse
@@ -63,7 +74,8 @@ export const Scene05Recipe: React.FC = () => {
             style={{
               fontFamily: fontFamily.sans,
               fontSize: 30,
-              color: tokens.inkMuted,
+              color: tokens.cream,
+              opacity: 0.92,
               marginTop: 16,
             }}
           >
@@ -76,7 +88,7 @@ export const Scene05Recipe: React.FC = () => {
             position: 'absolute',
             top: 60,
             right: 60,
-            background: tokens.saffronSoft,
+            background: tokens.saffron,
             padding: '14px 22px',
             borderRadius: 999,
             display: 'flex',
@@ -85,17 +97,17 @@ export const Scene05Recipe: React.FC = () => {
             opacity: kcalOp,
           }}
         >
-          <div style={{ fontFamily: fontFamily.mono, fontSize: 34, color: tokens.espresso, fontWeight: 700 }}>
+          <div style={{ fontFamily: fontFamily.mono, fontSize: 34, color: tokens.cream, fontWeight: 700 }}>
             685
           </div>
-          <div style={{ fontFamily: fontFamily.mono, fontSize: 18, color: tokens.espresso, letterSpacing: 2 }}>
+          <div style={{ fontFamily: fontFamily.mono, fontSize: 18, color: tokens.cream, letterSpacing: 2 }}>
             KCAL
           </div>
         </div>
       </div>
 
       {/* ingredients list */}
-      <div style={{ padding: '60px 90px', flex: 1 }}>
+      <div style={{ padding: '50px 90px', flex: 1 }}>
         <div
           style={{
             fontFamily: fontFamily.mono,
@@ -103,12 +115,12 @@ export const Scene05Recipe: React.FC = () => {
             letterSpacing: 3,
             color: tokens.inkMuted,
             textTransform: 'uppercase',
-            marginBottom: 28,
+            marginBottom: 24,
           }}
         >
           Ingrédients
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
           {INGREDIENTS.map((ing, i) => (
             <IngredientRow key={i} ingredient={ing} index={i} />
           ))}
@@ -120,18 +132,23 @@ export const Scene05Recipe: React.FC = () => {
 
 function IngredientRow({ ingredient, index }: { ingredient: typeof INGREDIENTS[number]; index: number }) {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
 
-  const startFrame = 40 + index * 12;
-  const op = interpolate(frame, [startFrame, startFrame + 10], [0, 1], { extrapolateRight: 'clamp', extrapolateLeft: 'clamp' });
-  const x = interpolate(frame, [startFrame, startFrame + 10], [30, 0], { extrapolateRight: 'clamp', extrapolateLeft: 'clamp' });
+  const startFrame = 30 + index * 8;
+  const op = interpolate(frame, [startFrame, startFrame + 8], [0, 1], {
+    extrapolateRight: 'clamp',
+    extrapolateLeft: 'clamp',
+  });
+  const x = interpolate(frame, [startFrame, startFrame + 8], [30, 0], {
+    extrapolateRight: 'clamp',
+    extrapolateLeft: 'clamp',
+  });
 
   return (
     <div
       style={{
         display: 'flex',
         alignItems: 'baseline',
-        padding: '20px 0',
+        padding: '18px 0',
         borderBottom: `1px solid ${tokens.line}`,
         opacity: op,
         transform: `translateX(${x}px)`,

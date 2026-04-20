@@ -9,13 +9,11 @@ export const Scene01Intro: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const cookyScale = spring({ frame, fps, config: { damping: 12 } });
-  const cookyRotate = interpolate(frame, [0, 60], [-20, 0], { extrapolateRight: 'clamp' });
-  const titleOpacity = interpolate(frame, [40, 70], [0, 1], { extrapolateRight: 'clamp' });
-  const titleY = interpolate(frame, [40, 70], [30, 0], {
-    extrapolateRight: 'clamp',
-  });
-  const taglineOpacity = interpolate(frame, [80, 110], [0, 1], { extrapolateRight: 'clamp' });
+  const cookyScale = spring({ frame, fps, config: { damping: 12 }, durationInFrames: 25 });
+  const cookyRotate = interpolate(frame, [0, 25], [-20, 0], { extrapolateRight: 'clamp' });
+  const titleOpacity = interpolate(frame, [18, 38], [0, 1], { extrapolateRight: 'clamp' });
+  const titleY = interpolate(frame, [18, 38], [30, 0], { extrapolateRight: 'clamp' });
+  const taglineOpacity = interpolate(frame, [40, 60], [0, 1], { extrapolateRight: 'clamp' });
 
   return (
     <AbsoluteFill

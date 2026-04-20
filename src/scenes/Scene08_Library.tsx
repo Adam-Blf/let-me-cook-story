@@ -1,25 +1,25 @@
-// Scène 08 · bibliothèque · grille de recettes qui apparaît en cascade
+// Scène 08 · bibliothèque · grille avec vraies photos
 import React from 'react';
-import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
+import { AbsoluteFill, Img, interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
 import { tokens } from '../tokens';
 import { fontFamily } from '../fonts';
+import { foodPhotos } from '../food';
 
 const RECIPES = [
-  { title: 'Carbonara', tone: tokens.creamSoft, kcal: 685, author: '@nonnaroma' },
-  { title: 'Riz gluant mangue', tone: tokens.saffronSoft, kcal: 420, author: '@thaichef' },
-  { title: 'Shakshuka', tone: `${tokens.tomato}40`, kcal: 310, author: '@mediterranea' },
-  { title: 'Cookies chocolat', tone: `${tokens.espresso}30`, kcal: 215, author: '@bakehouse' },
-  { title: 'Ramen tonkotsu', tone: `${tokens.plum}30`, kcal: 760, author: 'Ramen Club' },
-  { title: 'Salade feta', tone: `${tokens.olive}30`, kcal: 390, author: 'greenblog.fr' },
-  { title: 'Tacos al pastor', tone: `${tokens.saffron}40`, kcal: 480, author: '@tacomaria' },
-  { title: 'Galette bretonne', tone: tokens.cream, kcal: 340, author: 'Grand-mère' },
+  { title: 'Carbonara', photo: foodPhotos.carbonara, kcal: 685, author: '@nonnaroma' },
+  { title: 'Riz gluant mangue', photo: foodPhotos.mangoSticky, kcal: 420, author: '@thaichef' },
+  { title: 'Shakshuka', photo: foodPhotos.shakshuka, kcal: 310, author: '@mediterranea' },
+  { title: 'Cookies chocolat', photo: foodPhotos.cookies, kcal: 215, author: '@bakehouse' },
+  { title: 'Ramen tonkotsu', photo: foodPhotos.ramen, kcal: 760, author: 'Ramen Club' },
+  { title: 'Salade feta', photo: foodPhotos.salad, kcal: 390, author: 'greenblog.fr' },
+  { title: 'Tacos al pastor', photo: foodPhotos.tacos, kcal: 480, author: '@tacomaria' },
+  { title: 'Galette bretonne', photo: foodPhotos.galette, kcal: 340, author: 'Grand-mère' },
 ];
 
 export const Scene08Library: React.FC = () => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
 
-  const titleOp = interpolate(frame, [0, 15], [0, 1], { extrapolateRight: 'clamp' });
+  const titleOp = interpolate(frame, [0, 10], [0, 1], { extrapolateRight: 'clamp' });
 
   return (
     <AbsoluteFill style={{ background: tokens.cream, padding: 80 }}>
@@ -59,13 +59,12 @@ export const Scene08Library: React.FC = () => {
         </div>
       </div>
 
-      {/* grid */}
       <div
         style={{
-          marginTop: 50,
+          marginTop: 40,
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
-          gap: 20,
+          gap: 16,
           flex: 1,
         }}
       >
@@ -81,59 +80,82 @@ function Card({ recipe, index }: { recipe: typeof RECIPES[number]; index: number
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const delay = 20 + index * 6;
-  const scale = spring({ frame: frame - delay, fps, config: { damping: 12 }, durationInFrames: 30 });
-  const y = interpolate(frame, [delay, delay + 20], [40, 0], { extrapolateRight: 'clamp', extrapolateLeft: 'clamp' });
+  const delay = 10 + index * 5;
+  const scale = spring({ frame: frame - delay, fps, config: { damping: 14 }, durationInFrames: 25 });
+  const y = interpolate(frame, [delay, delay + 15], [30, 0], {
+    extrapolateRight: 'clamp',
+    extrapolateLeft: 'clamp',
+  });
 
   return (
     <div
       style={{
         transform: `scale(${scale}) translateY(${y}px)`,
-        background: recipe.tone,
-        borderRadius: 28,
-        padding: 32,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        minHeight: 220,
+        borderRadius: 24,
+        overflow: 'hidden',
+        minHeight: 260,
         position: 'relative',
       }}
     >
+      <Img src={recipe.photo} style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }} />
       <div
         style={{
-          fontFamily: fontFamily.mono,
-          fontSize: 16,
-          letterSpacing: 2,
-          color: tokens.inkMuted,
-          textTransform: 'uppercase',
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(180deg, rgba(0,0,0,0.15) 0%, transparent 40%, rgba(0,0,0,0.75) 100%)',
         }}
-      >
-        {recipe.author}
-      </div>
+      />
       <div
         style={{
-          fontFamily: fontFamily.serifItalic,
-          fontSize: 42,
-          color: tokens.ink,
-          letterSpacing: -0.5,
-          lineHeight: 1,
+          position: 'absolute',
+          inset: 24,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
         }}
       >
-        {recipe.title}
-      </div>
-      <div
-        style={{
-          alignSelf: 'flex-start',
-          background: '#ffffff80',
-          padding: '6px 14px',
-          borderRadius: 999,
-          fontFamily: fontFamily.mono,
-          fontSize: 16,
-          color: tokens.espresso,
-          letterSpacing: 1,
-        }}
-      >
-        {recipe.kcal} KCAL
+        <div
+          style={{
+            fontFamily: fontFamily.mono,
+            fontSize: 14,
+            letterSpacing: 2,
+            color: tokens.cream,
+            textTransform: 'uppercase',
+            opacity: 0.9,
+          }}
+        >
+          {recipe.author}
+        </div>
+        <div>
+          <div
+            style={{
+              fontFamily: fontFamily.serifItalic,
+              fontSize: 38,
+              color: tokens.cream,
+              letterSpacing: -0.5,
+              lineHeight: 1,
+              textShadow: '0 2px 12px rgba(0,0,0,0.5)',
+            }}
+          >
+            {recipe.title}
+          </div>
+          <div
+            style={{
+              marginTop: 12,
+              alignSelf: 'flex-start',
+              background: '#ffffffb0',
+              padding: '4px 12px',
+              borderRadius: 999,
+              fontFamily: fontFamily.mono,
+              fontSize: 14,
+              color: tokens.espresso,
+              letterSpacing: 1,
+              display: 'inline-block',
+            }}
+          >
+            {recipe.kcal} KCAL
+          </div>
+        </div>
       </div>
     </div>
   );

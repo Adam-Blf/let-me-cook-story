@@ -9,13 +9,13 @@ export const Scene07Finished: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const cookyScale = spring({ frame, fps, config: { damping: 9 } });
-  const titleOp = interpolate(frame, [20, 40], [0, 1], { extrapolateRight: 'clamp' });
-  const titleY = interpolate(frame, [20, 40], [30, 0], { extrapolateRight: 'clamp' });
-  const counterOp = interpolate(frame, [50, 70], [0, 1], { extrapolateRight: 'clamp' });
+  const cookyScale = spring({ frame, fps, config: { damping: 9 }, durationInFrames: 22 });
+  const titleOp = interpolate(frame, [12, 28], [0, 1], { extrapolateRight: 'clamp' });
+  const titleY = interpolate(frame, [12, 28], [30, 0], { extrapolateRight: 'clamp' });
+  const counterOp = interpolate(frame, [48, 65], [0, 1], { extrapolateRight: 'clamp' });
 
   const starsPop = [0, 1, 2, 3, 4].map((i) =>
-    spring({ frame: frame - (60 + i * 4), fps, config: { damping: 10 }, durationInFrames: 20 })
+    spring({ frame: frame - (30 + i * 4), fps, config: { damping: 10 }, durationInFrames: 18 })
   );
 
   return (

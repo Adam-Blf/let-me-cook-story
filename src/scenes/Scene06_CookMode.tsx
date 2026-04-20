@@ -9,9 +9,9 @@ export const Scene06CookMode: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const stepOp = interpolate(frame, [0, 20], [0, 1], { extrapolateRight: 'clamp' });
-  const timerProgress = spring({ frame, fps, durationInFrames: 100, config: { damping: 20 } });
-  const displayTimer = Math.max(0, 9 - Math.floor((frame / fps) * 1.8));
+  const stepOp = interpolate(frame, [0, 15], [0, 1], { extrapolateRight: 'clamp' });
+  const timerProgress = spring({ frame, fps, durationInFrames: 60, config: { damping: 20 } });
+  const displayTimer = Math.max(0, 9 - Math.floor((frame / fps) * 3.6));
 
   const cookyBounce = Math.sin((frame / fps) * 3) * 6;
 

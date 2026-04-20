@@ -9,10 +9,10 @@ export const Scene09Outro: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const cookyScale = spring({ frame, fps, config: { damping: 11 }, durationInFrames: 30 });
-  const wordmarkOp = interpolate(frame, [10, 30], [0, 1], { extrapolateRight: 'clamp' });
-  const wordmarkY = interpolate(frame, [10, 30], [30, 0], { extrapolateRight: 'clamp' });
-  const taglineOp = interpolate(frame, [30, 50], [0, 1], { extrapolateRight: 'clamp' });
+  const cookyScale = spring({ frame, fps, config: { damping: 11 }, durationInFrames: 25 });
+  const wordmarkOp = interpolate(frame, [8, 28], [0, 1], { extrapolateRight: 'clamp' });
+  const wordmarkY = interpolate(frame, [8, 28], [30, 0], { extrapolateRight: 'clamp' });
+  const taglineOp = interpolate(frame, [28, 48], [0, 1], { extrapolateRight: 'clamp' });
   const ctaScale = spring({ frame: frame - 50, fps, config: { damping: 10 }, durationInFrames: 20 });
 
   return (

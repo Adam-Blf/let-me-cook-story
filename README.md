@@ -1,12 +1,13 @@
 # Let Me Cook · Story 45s (Remotion)
 
-Teaser vidéo 45 s qui montre tout le parcours de l'app
+Teaser vidéo 25 s qui montre tout le parcours de l'app
 [Let Me Cook](https://github.com/Adam-Blf/let-me-cook). Cooky mascotte
 + Splash + Feed social + Share sheet + Extraction + Recipe + Cook mode
 + Finished + Library + Outro.
 
 Produit en Remotion 4 · 1080×1920 portrait (Stories Insta / TikTok /
-Reels) · 30 fps · 1350 frames.
+Reels) · 30 fps · 750 frames. Vraies photos de plats via Pexels
+(licence commerciale libre) dans `public/food/`.
 
 ## Lancer le studio
 
@@ -49,19 +50,36 @@ let-me-cook-story/
   package.json
 ```
 
-## Timing (30 fps · total 1350 frames · 45 s)
+## Timing (30 fps · total 750 frames · 25 s)
 
 | Scène | Frames | Durée |
 |---|--:|--:|
-| Intro | 150 | 5 s |
-| Feed | 150 | 5 s |
-| Share | 120 | 4 s |
-| Extraction | 150 | 5 s |
-| Recipe | 180 | 6 s |
-| CookMode | 150 | 5 s |
-| Finished | 150 | 5 s |
-| Library | 150 | 5 s |
-| Outro | 150 | 5 s |
+| Intro | 75 | 2.5 s |
+| Feed | 90 | 3 s |
+| Share | 60 | 2 s |
+| Extraction | 75 | 2.5 s |
+| Recipe | 120 | 4 s |
+| CookMode | 75 | 2.5 s |
+| Finished | 75 | 2.5 s |
+| Library | 90 | 3 s |
+| Outro | 90 | 3 s |
+
+## Photos
+
+Toutes les photos de plats viennent de [Pexels](https://pexels.com)
+(licence libre, commercial OK, attribution non obligatoire mais
+recommandée).
+
+| Fichier | Auteur Pexels | ID |
+|---|---|---|
+| `carbonara.jpg` | Pexels | 29039082 |
+| `mango-sticky.jpg` | Mr Marv | 36681615 |
+| `shakshuka.jpg` | Oleksandr Plakhota | 30892286 |
+| `cookies.jpg` | Pexels | 31116124 |
+| `ramen.jpg` | Pexels | 33493350 |
+| `salad.jpg` | Pexels | 1152237 |
+| `tacos.jpg` | Pexels | 12034501 |
+| `galette.jpg` | Pexels | 32762150 |
 
 ## Exports prévus
 

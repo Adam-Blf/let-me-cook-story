@@ -1,18 +1,17 @@
-// Scène 02 · scroll social feed · on voit une vidéo TikTok de carbonara
+// Scène 02 · scroll social feed · vraies photos Pexels
 import React from 'react';
-import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from 'remotion';
+import { AbsoluteFill, Img, interpolate, useCurrentFrame, useVideoConfig } from 'remotion';
 import { PhoneFrame } from '../PhoneFrame';
 import { tokens } from '../tokens';
 import { fontFamily } from '../fonts';
+import { foodPhotos } from '../food';
 
 export const Scene02Feed: React.FC = () => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
 
-  // scroll offset
-  const scroll = interpolate(frame, [0, 90], [0, -400], { extrapolateRight: 'clamp' });
-  const phoneSlide = interpolate(frame, [0, 20], [200, 0], { extrapolateRight: 'clamp' });
-  const headlineOp = interpolate(frame, [0, 25], [0, 1], { extrapolateRight: 'clamp' });
+  const scroll = interpolate(frame, [15, 75], [0, -400], { extrapolateRight: 'clamp' });
+  const phoneSlide = interpolate(frame, [0, 18], [200, 0], { extrapolateRight: 'clamp' });
+  const headlineOp = interpolate(frame, [0, 15], [0, 1], { extrapolateRight: 'clamp' });
 
   return (
     <AbsoluteFill
@@ -42,28 +41,27 @@ export const Scene02Feed: React.FC = () => {
 
       <div style={{ transform: `translateY(${phoneSlide}px)` }}>
         <PhoneFrame width={540}>
-            <div style={{ height: '100%', position: 'relative', overflow: 'hidden' }}>
-              <div style={{ transform: `translateY(${scroll}px)`, paddingTop: 100 }}>
-                {FEED_ITEMS.map((item, i) => (
-                  <FeedPost key={i} {...item} />
-                ))}
-              </div>
-              {/* Logo TikTok overlay */}
-              <div
-                style={{
-                  position: 'absolute',
-                  top: 100,
-                  left: 20,
-                  fontFamily: fontFamily.mono,
-                  fontSize: 16,
-                  color: '#fff',
-                  mixBlendMode: 'difference',
-                  letterSpacing: 3,
-                }}
-              >
-                TIKTOK
-              </div>
+          <div style={{ height: '100%', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ transform: `translateY(${scroll}px)`, paddingTop: 100 }}>
+              {FEED_ITEMS.map((item, i) => (
+                <FeedPost key={i} {...item} />
+              ))}
             </div>
+            <div
+              style={{
+                position: 'absolute',
+                top: 100,
+                left: 20,
+                fontFamily: fontFamily.mono,
+                fontSize: 16,
+                color: '#fff',
+                mixBlendMode: 'difference',
+                letterSpacing: 3,
+              }}
+            >
+              TIKTOK
+            </div>
+          </div>
         </PhoneFrame>
       </div>
     </AbsoluteFill>
@@ -71,20 +69,20 @@ export const Scene02Feed: React.FC = () => {
 };
 
 const FEED_ITEMS = [
-  { tone: tokens.saffron, title: '@tacomaria', caption: 'Tacos al pastor rapides', duration: '0:22' },
-  { tone: tokens.tomato, title: '@nonnaroma', caption: 'Carbonara crémeuse · sans crème', duration: '0:47', active: true },
-  { tone: tokens.olive, title: '@greenkitchen', caption: 'Salade lentilles feta', duration: '0:18' },
-  { tone: tokens.plum, title: '@ramenclub', caption: 'Tonkotsu de A à Z', duration: '2:04' },
+  { photo: foodPhotos.tacos, title: '@tacomaria', caption: 'Tacos al pastor rapides', duration: '0:22' },
+  { photo: foodPhotos.carbonara, title: '@nonnaroma', caption: 'Carbonara crémeuse · sans crème', duration: '0:47', active: true },
+  { photo: foodPhotos.salad, title: '@greenkitchen', caption: 'Salade lentilles feta', duration: '0:18' },
+  { photo: foodPhotos.ramen, title: '@ramenclub', caption: 'Tonkotsu de A à Z', duration: '2:04' },
 ];
 
 function FeedPost({
-  tone,
+  photo,
   title,
   caption,
   duration,
   active,
 }: {
-  tone: string;
+  photo: string;
   title: string;
   caption: string;
   duration: string;
@@ -95,15 +93,18 @@ function FeedPost({
       style={{
         width: '100%',
         height: 480,
-        background: tone,
-        padding: 28,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'flex-end',
         position: 'relative',
         borderBottom: `2px solid ${tokens.ink}`,
       }}
     >
+      <Img src={photo} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(180deg, rgba(0,0,0,0.2) 0%, transparent 30%, transparent 60%, rgba(0,0,0,0.75) 100%)',
+        }}
+      />
       <div
         style={{
           position: 'absolute',
@@ -141,8 +142,10 @@ function FeedPost({
           ▶
         </div>
       )}
-      <div style={{ color: '#fff', fontFamily: fontFamily.sans, fontSize: 22, fontWeight: 600 }}>{title}</div>
-      <div style={{ color: '#fff', fontFamily: fontFamily.sans, fontSize: 18, opacity: 0.9, marginTop: 4 }}>{caption}</div>
+      <div style={{ position: 'absolute', bottom: 22, left: 24, right: 24 }}>
+        <div style={{ color: '#fff', fontFamily: fontFamily.sans, fontSize: 22, fontWeight: 600 }}>{title}</div>
+        <div style={{ color: '#fff', fontFamily: fontFamily.sans, fontSize: 18, opacity: 0.92, marginTop: 4 }}>{caption}</div>
+      </div>
     </div>
   );
 }
