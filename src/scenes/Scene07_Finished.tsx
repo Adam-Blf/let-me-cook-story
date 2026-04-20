@@ -1,42 +1,44 @@
 // Scène 07 · bon appétit · Cooky happy + rating + compteur usage
 import React from 'react';
-import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
+import { Easing, interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
 import { Cooky } from '../Cooky';
 import { tokens } from '../tokens';
 import { fontFamily } from '../fonts';
+import { StoryLayout } from '../StoryLayout';
 
 export const Scene07Finished: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const cookyScale = spring({ frame, fps, config: { damping: 9 }, durationInFrames: 22 });
-  const titleOp = interpolate(frame, [12, 28], [0, 1], { extrapolateRight: 'clamp' });
-  const titleY = interpolate(frame, [12, 28], [30, 0], { extrapolateRight: 'clamp' });
-  const counterOp = interpolate(frame, [48, 65], [0, 1], { extrapolateRight: 'clamp' });
+  const cookyScale = spring({ frame, fps, config: { damping: 10 }, durationInFrames: 28 });
+  const titleOp = interpolate(frame, [15, 35], [0, 1], {
+    extrapolateRight: 'clamp',
+    easing: Easing.out(Easing.cubic),
+  });
+  const titleY = interpolate(frame, [15, 35], [30, 0], {
+    extrapolateRight: 'clamp',
+    easing: Easing.out(Easing.cubic),
+  });
+  const counterOp = interpolate(frame, [55, 75], [0, 1], { extrapolateRight: 'clamp' });
 
   const starsPop = [0, 1, 2, 3, 4].map((i) =>
-    spring({ frame: frame - (30 + i * 4), fps, config: { damping: 10 }, durationInFrames: 18 })
+    spring({ frame: frame - (38 + i * 5), fps, config: { damping: 10 }, durationInFrames: 22 })
   );
 
   return (
-    <AbsoluteFill
-      style={{
-        background: `radial-gradient(ellipse at 50% 40%, ${tokens.saffronSoft}, ${tokens.cream})`,
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        gap: 50,
-      }}
+    <StoryLayout
+      bg={`radial-gradient(ellipse at 50% 45%, ${tokens.saffronSoft}, ${tokens.cream})`}
+      gap={40}
     >
       <div style={{ transform: `scale(${cookyScale})` }}>
-        <Cooky size={500} pose="happy" />
+        <Cooky size={420} pose="happy" />
       </div>
 
       <div style={{ opacity: titleOp, transform: `translateY(${titleY}px)`, textAlign: 'center' }}>
         <div
           style={{
             fontFamily: fontFamily.serifItalic,
-            fontSize: 160,
+            fontSize: 150,
             color: tokens.ink,
             letterSpacing: -2,
             lineHeight: 1,
@@ -46,10 +48,9 @@ export const Scene07Finished: React.FC = () => {
         </div>
       </div>
 
-      {/* rating stars */}
-      <div style={{ display: 'flex', gap: 14 }}>
+      <div style={{ display: 'flex', gap: 12 }}>
         {starsPop.map((s, i) => (
-          <div key={i} style={{ transform: `scale(${s})`, fontSize: 72, color: tokens.saffron }}>
+          <div key={i} style={{ transform: `scale(${s})`, fontSize: 68, color: tokens.saffron }}>
             ★
           </div>
         ))}
@@ -62,17 +63,17 @@ export const Scene07Finished: React.FC = () => {
           alignItems: 'baseline',
           gap: 14,
           background: tokens.saffronSoft,
-          padding: '18px 32px',
+          padding: '16px 30px',
           borderRadius: 999,
         }}
       >
-        <div style={{ fontFamily: fontFamily.mono, fontSize: 40, color: tokens.espresso, fontWeight: 700 }}>
+        <div style={{ fontFamily: fontFamily.mono, fontSize: 36, color: tokens.espresso, fontWeight: 700 }}>
           5×
         </div>
         <div
           style={{
             fontFamily: fontFamily.sans,
-            fontSize: 24,
+            fontSize: 22,
             color: tokens.espresso,
             letterSpacing: 1,
           }}
@@ -80,6 +81,6 @@ export const Scene07Finished: React.FC = () => {
           cuisinée ce mois-ci
         </div>
       </div>
-    </AbsoluteFill>
+    </StoryLayout>
   );
 };

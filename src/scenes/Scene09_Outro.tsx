@@ -1,33 +1,32 @@
-// Scène 09 · outro · wordmark + CTA + mascotte wave
+// Scène 09 · outro · wordmark + CTA (safe zone)
 import React from 'react';
-import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
+import { Easing, interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
 import { Cooky } from '../Cooky';
 import { tokens } from '../tokens';
 import { fontFamily } from '../fonts';
+import { StoryLayout } from '../StoryLayout';
 
 export const Scene09Outro: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const cookyScale = spring({ frame, fps, config: { damping: 11 }, durationInFrames: 25 });
-  const wordmarkOp = interpolate(frame, [8, 28], [0, 1], { extrapolateRight: 'clamp' });
-  const wordmarkY = interpolate(frame, [8, 28], [30, 0], { extrapolateRight: 'clamp' });
-  const taglineOp = interpolate(frame, [28, 48], [0, 1], { extrapolateRight: 'clamp' });
-  const ctaScale = spring({ frame: frame - 50, fps, config: { damping: 10 }, durationInFrames: 20 });
+  const cookyScale = spring({ frame, fps, config: { damping: 11 }, durationInFrames: 30 });
+  const wordmarkOp = interpolate(frame, [10, 32], [0, 1], {
+    extrapolateRight: 'clamp',
+    easing: Easing.out(Easing.cubic),
+  });
+  const wordmarkY = interpolate(frame, [10, 32], [30, 0], {
+    extrapolateRight: 'clamp',
+    easing: Easing.out(Easing.cubic),
+  });
+  const taglineOp = interpolate(frame, [30, 55], [0, 1], { extrapolateRight: 'clamp' });
+  const ctaScale = spring({ frame: frame - 55, fps, config: { damping: 11 }, durationInFrames: 25 });
+  const ctaGlow = Math.sin((frame / fps) * 2) * 4;
 
   return (
-    <AbsoluteFill
-      style={{
-        background: tokens.ink,
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        gap: 50,
-        padding: 80,
-      }}
-    >
+    <StoryLayout bg={tokens.ink} gap={36}>
       <div style={{ transform: `scale(${cookyScale})` }}>
-        <Cooky size={340} pose="wave" />
+        <Cooky size={300} pose="wave" />
       </div>
 
       <div
@@ -40,7 +39,7 @@ export const Scene09Outro: React.FC = () => {
         <div
           style={{
             fontFamily: fontFamily.serifItalic,
-            fontSize: 170,
+            fontSize: 150,
             color: tokens.cream,
             letterSpacing: -3,
             lineHeight: 0.95,
@@ -53,32 +52,34 @@ export const Scene09Outro: React.FC = () => {
       <div
         style={{
           opacity: taglineOp,
-          fontFamily: fontFamily.sans,
-          fontSize: 34,
-          color: tokens.inkFaint,
+          fontFamily: fontFamily.serifItalic,
+          fontSize: 46,
+          color: tokens.saffronSoft,
           textAlign: 'center',
           maxWidth: 900,
-          lineHeight: 1.3,
+          lineHeight: 1.2,
+          padding: '0 60px',
         }}
       >
-        Partage · Cooky extrait · Tu cuisines.
+        Parce que cuisiner c'est s'amuser.
       </div>
 
       <div
         style={{
           transform: `scale(${ctaScale})`,
-          padding: '28px 56px',
+          padding: '22px 44px',
           background: tokens.saffron,
           borderRadius: 999,
           fontFamily: fontFamily.sans,
-          fontSize: 32,
+          fontSize: 26,
           color: tokens.espresso,
           fontWeight: 600,
           letterSpacing: 0.5,
+          boxShadow: `0 ${ctaGlow + 12}px ${ctaGlow + 24}px ${tokens.saffron}44`,
         }}
       >
-        Bientôt sur l'App Store + Play Store
+        Bientôt sur iOS + Android
       </div>
-    </AbsoluteFill>
+    </StoryLayout>
   );
 };

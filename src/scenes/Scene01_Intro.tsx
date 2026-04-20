@@ -1,9 +1,10 @@
 // Scène 01 · cold open · Cooky apparaît, wordmark "Let Me Cook"
 import React from 'react';
-import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
+import { interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
 import { Cooky } from '../Cooky';
 import { tokens } from '../tokens';
 import { fontFamily } from '../fonts';
+import { StoryLayout } from '../StoryLayout';
 
 export const Scene01Intro: React.FC = () => {
   const frame = useCurrentFrame();
@@ -16,24 +17,19 @@ export const Scene01Intro: React.FC = () => {
   const taglineOpacity = interpolate(frame, [40, 60], [0, 1], { extrapolateRight: 'clamp' });
 
   return (
-    <AbsoluteFill
-      style={{
-        background: `radial-gradient(ellipse at 30% 20%, ${tokens.saffronSoft} 0%, ${tokens.cream} 60%)`,
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        gap: 40,
-      }}
+    <StoryLayout
+      bg={`radial-gradient(ellipse at 30% 30%, ${tokens.saffronSoft} 0%, ${tokens.cream} 60%)`}
+      gap={36}
     >
       <div style={{ transform: `scale(${cookyScale}) rotate(${cookyRotate}deg)` }}>
-        <Cooky size={480} pose="wave" />
+        <Cooky size={440} pose="wave" />
       </div>
 
       <div style={{ opacity: titleOpacity, transform: `translateY(${titleY}px)`, textAlign: 'center' }}>
         <div
           style={{
             fontFamily: fontFamily.serifItalic,
-            fontSize: 140,
+            fontSize: 130,
             color: tokens.ink,
             letterSpacing: -2,
             lineHeight: 1,
@@ -46,15 +42,17 @@ export const Scene01Intro: React.FC = () => {
       <div
         style={{
           opacity: taglineOpacity,
-          fontFamily: fontFamily.mono,
-          fontSize: 22,
-          color: tokens.inkMuted,
-          letterSpacing: 4,
-          textTransform: 'uppercase',
+          fontFamily: fontFamily.serifItalic,
+          fontSize: 40,
+          color: tokens.saffron,
+          textAlign: 'center',
+          maxWidth: 900,
+          lineHeight: 1.15,
+          padding: '0 60px',
         }}
       >
-        · Cooky, le petit chef ·
+        Parce que cuisiner c'est s'amuser.
       </div>
-    </AbsoluteFill>
+    </StoryLayout>
   );
 };

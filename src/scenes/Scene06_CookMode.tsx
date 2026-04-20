@@ -1,43 +1,40 @@
-// Scène 06 · cook mode dark · étape en cours, timer, typo géante
+// Scène 06 · cook mode dark · étape en cours, timer, typo géante (safe zone)
 import React from 'react';
-import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
+import { Easing, interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
 import { Cooky } from '../Cooky';
 import { tokens } from '../tokens';
 import { fontFamily } from '../fonts';
+import { StoryLayout } from '../StoryLayout';
 
 export const Scene06CookMode: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const stepOp = interpolate(frame, [0, 15], [0, 1], { extrapolateRight: 'clamp' });
-  const timerProgress = spring({ frame, fps, durationInFrames: 60, config: { damping: 20 } });
-  const displayTimer = Math.max(0, 9 - Math.floor((frame / fps) * 3.6));
-
-  const cookyBounce = Math.sin((frame / fps) * 3) * 6;
+  const stepOp = interpolate(frame, [0, 22], [0, 1], {
+    extrapolateRight: 'clamp',
+    easing: Easing.out(Easing.cubic),
+  });
+  const timerProgress = spring({ frame, fps, durationInFrames: 80, config: { damping: 24 } });
+  const displayTimer = Math.max(0, 9 - Math.floor((frame / fps) * 2.6));
+  const cookyBounce = Math.sin((frame / fps) * 2.8) * 5;
 
   return (
-    <AbsoluteFill
-      style={{
-        background: tokens.espresso,
-        flexDirection: 'column',
-        padding: 80,
-      }}
-    >
+    <StoryLayout bg={tokens.espresso} padding={60} justify="space-between" align="stretch" gap={40}>
       {/* top bar */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div
           style={{
             fontFamily: fontFamily.mono,
-            fontSize: 24,
+            fontSize: 20,
             letterSpacing: 4,
             color: tokens.saffron,
             textTransform: 'uppercase',
           }}
         >
-          COOK MODE · Étape 4/6
+          COOK MODE · 4/6
         </div>
         <div style={{ transform: `translateY(${cookyBounce}px)` }}>
-          <Cooky size={110} pose="cooking" />
+          <Cooky size={100} pose="cooking" />
         </div>
       </div>
 
@@ -54,7 +51,7 @@ export const Scene06CookMode: React.FC = () => {
         <div
           style={{
             fontFamily: fontFamily.serifItalic,
-            fontSize: 110,
+            fontSize: 92,
             color: tokens.cream,
             letterSpacing: -1,
             lineHeight: 1.05,
@@ -65,9 +62,9 @@ export const Scene06CookMode: React.FC = () => {
         <div
           style={{
             fontFamily: fontFamily.sans,
-            fontSize: 36,
+            fontSize: 30,
             color: tokens.inkFaint,
-            marginTop: 40,
+            marginTop: 30,
           }}
         >
           Garde 1 tasse d'eau de cuisson.
@@ -79,23 +76,23 @@ export const Scene06CookMode: React.FC = () => {
         style={{
           display: 'flex',
           alignItems: 'center',
-          gap: 30,
-          padding: '28px 40px',
+          gap: 24,
+          padding: '22px 30px',
           background: tokens.espressoCard,
-          borderRadius: 28,
+          borderRadius: 24,
         }}
       >
         <div
           style={{
-            width: 80,
-            height: 80,
+            width: 70,
+            height: 70,
             borderRadius: '50%',
             background: tokens.tomato,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             fontFamily: fontFamily.mono,
-            fontSize: 36,
+            fontSize: 32,
             color: '#fff',
             fontWeight: 700,
           }}
@@ -106,7 +103,7 @@ export const Scene06CookMode: React.FC = () => {
           <div
             style={{
               fontFamily: fontFamily.mono,
-              fontSize: 18,
+              fontSize: 16,
               letterSpacing: 3,
               color: tokens.tomato,
               textTransform: 'uppercase',
@@ -114,16 +111,16 @@ export const Scene06CookMode: React.FC = () => {
           >
             MINUTEUR
           </div>
-          <div style={{ fontFamily: fontFamily.sans, fontSize: 26, color: tokens.cream, marginTop: 4 }}>
-            {displayTimer} minutes restantes
+          <div style={{ fontFamily: fontFamily.sans, fontSize: 22, color: tokens.cream, marginTop: 3 }}>
+            {displayTimer} min restantes
           </div>
           <div
             style={{
-              height: 6,
+              height: 5,
               width: '100%',
-              background: `${tokens.cream}20`,
+              background: `${tokens.cream}22`,
               borderRadius: 3,
-              marginTop: 12,
+              marginTop: 10,
               overflow: 'hidden',
             }}
           >
@@ -137,6 +134,6 @@ export const Scene06CookMode: React.FC = () => {
           </div>
         </div>
       </div>
-    </AbsoluteFill>
+    </StoryLayout>
   );
 };

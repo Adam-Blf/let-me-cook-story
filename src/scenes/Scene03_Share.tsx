@@ -1,62 +1,57 @@
 // Scène 03 · share sheet iOS · preview de la vraie photo carbonara
 import React from 'react';
-import { AbsoluteFill, Img, interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
+import { Easing, Img, interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
 import { PhoneFrame } from '../PhoneFrame';
 import { Cooky } from '../Cooky';
 import { tokens } from '../tokens';
 import { fontFamily } from '../fonts';
 import { foodPhotos } from '../food';
+import { StoryLayout } from '../StoryLayout';
 
 export const Scene03Share: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const sheetY = spring({ frame, fps, config: { damping: 16 }, durationInFrames: 25 });
-  const headline = interpolate(frame, [0, 12], [0, 1], { extrapolateRight: 'clamp' });
-  const tapFrame = frame - 30;
-  const tapScale = spring({
-    frame: tapFrame,
-    fps,
-    config: { damping: 8, stiffness: 300, mass: 0.5 },
-    durationInFrames: 20,
+  const sheetY = spring({ frame, fps, config: { damping: 20 }, durationInFrames: 40 });
+  const headline = interpolate(frame, [0, 22], [0, 1], {
+    extrapolateRight: 'clamp',
+    easing: Easing.out(Easing.cubic),
   });
-  const tapOpacity = interpolate(frame, [30, 42], [0, 1], { extrapolateRight: 'clamp' });
+  const tapScale = spring({
+    frame: frame - 50,
+    fps,
+    config: { damping: 10, stiffness: 250, mass: 0.5 },
+    durationInFrames: 30,
+  });
+  const tapOpacity = interpolate(frame, [50, 65], [0, 1], { extrapolateRight: 'clamp' });
 
   return (
-    <AbsoluteFill
-      style={{
-        background: tokens.ink,
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        paddingBottom: 80,
-      }}
-    >
+    <StoryLayout bg={tokens.ink} gap={40} justify="center">
       <div
         style={{
           fontFamily: fontFamily.serifItalic,
-          fontSize: 92,
+          fontSize: 82,
           color: tokens.cream,
           textAlign: 'center',
           letterSpacing: -1,
           maxWidth: 900,
           lineHeight: 1.05,
           opacity: headline,
-          marginBottom: 60,
+          padding: '0 40px',
         }}
       >
         Tu partages.<br />Cooky s'en occupe.
       </div>
 
-      <div style={{ transform: `translateY(${(1 - sheetY) * 500}px)` }}>
-        <PhoneFrame width={520}>
+      <div style={{ transform: `translateY(${(1 - sheetY) * 400}px)` }}>
+        <PhoneFrame width={460}>
           <div style={{ height: '100%', background: tokens.cream, display: 'flex', flexDirection: 'column' }}>
-            {/* preview reel */}
             <div
               style={{
-                height: 260,
-                margin: 20,
-                marginTop: 90,
-                borderRadius: 18,
+                height: 210,
+                margin: 18,
+                marginTop: 84,
+                borderRadius: 16,
                 position: 'relative',
                 overflow: 'hidden',
               }}
@@ -72,10 +67,10 @@ export const Scene03Share: React.FC = () => {
               <div
                 style={{
                   position: 'absolute',
-                  top: 16,
-                  left: 16,
+                  top: 14,
+                  left: 14,
                   fontFamily: fontFamily.mono,
-                  fontSize: 14,
+                  fontSize: 12,
                   color: '#fff',
                   letterSpacing: 2,
                 }}
@@ -85,11 +80,11 @@ export const Scene03Share: React.FC = () => {
               <div
                 style={{
                   position: 'absolute',
-                  bottom: 16,
-                  left: 16,
+                  bottom: 14,
+                  left: 14,
                   color: '#fff',
                   fontFamily: fontFamily.sans,
-                  fontSize: 18,
+                  fontSize: 16,
                   fontWeight: 600,
                 }}
               >
@@ -97,23 +92,27 @@ export const Scene03Share: React.FC = () => {
               </div>
             </div>
 
-            {/* share targets */}
-            <div style={{ padding: '10px 20px 0', display: 'flex', gap: 12 }}>
+            <div style={{ padding: '8px 18px 0', display: 'flex', gap: 10 }}>
               {['Airdrop', 'Messages', 'Mail', 'WhatsApp'].map((n) => (
                 <ShareBubble key={n} label={n} />
               ))}
             </div>
 
-            {/* app list */}
-            <div style={{ margin: '14px 20px 20px', background: tokens.paper, borderRadius: 18, padding: '14px 0' }}>
+            <div style={{ margin: '12px 18px 18px', background: tokens.paper, borderRadius: 16, padding: '10px 0' }}>
               {['Insta Story', 'Messages', 'Notes', 'Let Me Cook'].map((n, i) => (
-                <AppRow key={n} label={n} highlight={i === 3} tapScale={i === 3 ? tapScale : 0} tapOp={i === 3 ? tapOpacity : 0} />
+                <AppRow
+                  key={n}
+                  label={n}
+                  highlight={i === 3}
+                  tapScale={i === 3 ? tapScale : 0}
+                  tapOp={i === 3 ? tapOpacity : 0}
+                />
               ))}
             </div>
           </div>
         </PhoneFrame>
       </div>
-    </AbsoluteFill>
+    </StoryLayout>
   );
 };
 
@@ -121,23 +120,23 @@ function ShareBubble({ label }: { label: string }) {
   return (
     <div
       style={{
-        width: 76,
-        height: 90,
+        width: 66,
+        height: 80,
         background: tokens.creamSoft,
-        borderRadius: 14,
+        borderRadius: 12,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         fontFamily: fontFamily.sans,
-        fontSize: 10,
+        fontSize: 9,
         color: tokens.inkMuted,
       }}
     >
       <div
         style={{
-          width: 42,
-          height: 42,
+          width: 36,
+          height: 36,
           borderRadius: '50%',
           background: tokens.saffronSoft,
           marginBottom: 6,
@@ -162,36 +161,32 @@ function AppRow({
   return (
     <div
       style={{
-        padding: '16px 20px',
+        padding: '12px 18px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         position: 'relative',
-        background: highlight ? `${tokens.saffronSoft}88` : 'transparent',
+        background: highlight ? `${tokens.saffronSoft}aa` : 'transparent',
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
         <div
           style={{
-            width: 40,
-            height: 40,
-            borderRadius: 10,
+            width: 36,
+            height: 36,
+            borderRadius: 9,
             background: highlight ? tokens.saffron : tokens.inkFaint,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
           }}
         >
-          {highlight && (
-            <div style={{ width: 26, height: 26 }}>
-              <Cooky size={26} pose="wave" />
-            </div>
-          )}
+          {highlight && <Cooky size={24} pose="wave" />}
         </div>
         <div
           style={{
             fontFamily: fontFamily.sans,
-            fontSize: 16,
+            fontSize: 14,
             color: tokens.ink,
             fontWeight: highlight ? 600 : 400,
           }}
@@ -204,11 +199,11 @@ function AppRow({
         <div
           style={{
             position: 'absolute',
-            right: 24,
+            right: 20,
             top: '50%',
             transform: `translateY(-50%) scale(${tapScale})`,
-            width: 40,
-            height: 40,
+            width: 34,
+            height: 34,
             borderRadius: '50%',
             border: `2px solid ${tokens.saffron}`,
             opacity: tapOp,
