@@ -14,6 +14,30 @@ Produit en Remotion 4 · 1080×1920 portrait (Stories Insta / TikTok /
 Reels) · 30 fps · 750 frames. Vraies photos de plats via Pexels
 (licence commerciale libre) dans `public/food/`.
 
+## Architecture
+
+```mermaid
+flowchart TB
+    Entry["index.ts<br/>registerRoot"]
+    Root["Root.tsx<br/>Compositions · story · story-square"]
+    Story["Story.tsx<br/>Series · enchaîne les 10 scènes"]
+    Layout["StoryLayout.tsx<br/>PhoneFrame · fond · safe area"]
+    Scenes["scenes/Scene01..10<br/>Intro · Feed · Share · Extraction<br/>Recipe · CookMode · Finished · Library · Outro · Install"]
+    Cooky["Cooky.tsx<br/>mascotte SVG animée"]
+    Tokens["tokens.ts · fonts.ts · food.ts<br/>palette · Google Fonts · photos Pexels"]
+    Fade["useFadeEnvelope.ts<br/>transitions fade in/out par scène"]
+    Render["remotion render<br/>mp4 1080×1920 · 1080×1080 · 30 fps"]
+
+    Entry --> Root
+    Root --> Story
+    Story --> Layout
+    Layout --> Scenes
+    Scenes --> Cooky
+    Scenes --> Tokens
+    Scenes --> Fade
+    Root --> Render
+```
+
 ## Lancer le studio
 
 ```bash
