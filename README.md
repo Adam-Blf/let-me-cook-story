@@ -115,3 +115,14 @@ recommandée).
 - `let-me-cook-story.mp4` · 1080×1920 · Insta Story, TikTok, Reels, Shorts
 - `let-me-cook-square.mp4` · 1080×1080 · Feed Insta
 - (Futur) `let-me-cook-landscape.mp4` · 1920×1080 · YouTube, X, LinkedIn
+
+
+## Star History
+
+<a href="https://www.star-history.com/?repos=Adam-Blf%2Flet-me-cook-story&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=Adam-Blf/let-me-cook-story&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=Adam-Blf/let-me-cook-story&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=Adam-Blf/let-me-cook-story&type=date&legend=top-left" />
+ </picture>
+</a>
