@@ -1,4 +1,4 @@
-# Let Me Cook · Story 45s (Remotion)
+# Let Me Cook - Story 45s (Remotion)
 
 <!-- adam-badges:start -->
 [![commits](https://img.shields.io/github/commit-activity/t/Adam-Blf/let-me-cook-story?color=001329&label=commits&style=flat-square)](https://github.com/Adam-Blf/let-me-cook-story/commits) [![visites](https://hits.sh/github.com/Adam-Blf/let-me-cook-story.svg?style=flat-square&label=visites&color=001329)](https://hits.sh/github.com/Adam-Blf/let-me-cook-story/) [![last commit](https://img.shields.io/github/last-commit/Adam-Blf/let-me-cook-story?color=D4A437&style=flat-square&label=dernier%20push)](https://github.com/Adam-Blf/let-me-cook-story/commits) [![top language](https://img.shields.io/github/languages/top/Adam-Blf/let-me-cook-story?style=flat-square)](https://github.com/Adam-Blf/let-me-cook-story) [![license](https://img.shields.io/github/license/Adam-Blf/let-me-cook-story?style=flat-square&color=D4A437)](LICENSE)
@@ -10,8 +10,8 @@ Teaser vidéo 25 s qui montre tout le parcours de l'app
 + Splash + Feed social + Share sheet + Extraction + Recipe + Cook mode
 + Finished + Library + Outro.
 
-Produit en Remotion 4 · 1080×1920 portrait (Stories Insta / TikTok /
-Reels) · 30 fps · 750 frames. Vraies photos de plats via Pexels
+Produit en Remotion 4 - 1080×1920 portrait (Stories Insta / TikTok /
+Reels) - 30 fps - 750 frames. Vraies photos de plats via Pexels
 (licence commerciale libre) dans `public/food/`.
 
 ## Architecture
@@ -19,14 +19,14 @@ Reels) · 30 fps · 750 frames. Vraies photos de plats via Pexels
 ```mermaid
 flowchart TB
     Entry["index.ts<br/>registerRoot"]
-    Root["Root.tsx<br/>Compositions · story · story-square"]
-    Story["Story.tsx<br/>Series · enchaîne les 10 scènes"]
-    Layout["StoryLayout.tsx<br/>PhoneFrame · fond · safe area"]
-    Scenes["scenes/Scene01..10<br/>Intro · Feed · Share · Extraction<br/>Recipe · CookMode · Finished · Library · Outro · Install"]
+    Root["Root.tsx<br/>Compositions - story - story-square"]
+    Story["Story.tsx<br/>Series - enchaîne les 10 scènes"]
+    Layout["StoryLayout.tsx<br/>PhoneFrame - fond - safe area"]
+    Scenes["scenes/Scene01..10<br/>Intro - Feed - Share - Extraction<br/>Recipe - CookMode - Finished - Library - Outro - Install"]
     Cooky["Cooky.tsx<br/>mascotte SVG animée"]
-    Tokens["tokens.ts · fonts.ts · food.ts<br/>palette · Google Fonts · photos Pexels"]
+    Tokens["tokens.ts - fonts.ts - food.ts<br/>palette - Google Fonts - photos Pexels"]
     Fade["useFadeEnvelope.ts<br/>transitions fade in/out par scène"]
-    Render["remotion render<br/>mp4 1080×1920 · 1080×1080 · 30 fps"]
+    Render["remotion render<br/>mp4 1080×1920 - 1080×1080 - 30 fps"]
 
     Entry --> Root
     Root --> Story
@@ -58,28 +58,28 @@ npm run render:square       # version carrée 1080×1080 pour feed Insta
 ```
 let-me-cook-story/
   src/
-    index.ts               · entry · registerRoot
-    Root.tsx               · Compositions (story, story-square, scenes/*)
-    Story.tsx              · Series qui enchaîne les 9 scènes
-    tokens.ts              · palette (même que l'app)
-    fonts.ts               · Google Fonts (Instrument Serif, Geist, Geist Mono)
-    Cooky.tsx              · mascotte SVG (7 poses)
-    PhoneFrame.tsx         · iPhone shell réutilisable
+    index.ts               - entry - registerRoot
+    Root.tsx               - Compositions (story, story-square, scenes/*)
+    Story.tsx              - Series qui enchaîne les 9 scènes
+    tokens.ts              - palette (même que l'app)
+    fonts.ts               - Google Fonts (Instrument Serif, Geist, Geist Mono)
+    Cooky.tsx              - mascotte SVG (7 poses)
+    PhoneFrame.tsx         - iPhone shell réutilisable
     scenes/
-      Scene01_Intro.tsx    · 5s · Cooky + wordmark
-      Scene02_Feed.tsx     · 5s · scroll TikTok
-      Scene03_Share.tsx    · 4s · share sheet iOS
-      Scene04_Extraction.tsx · 5s · loader + 4 étapes
-      Scene05_Recipe.tsx   · 6s · fiche recette + ingrédients cascade
-      Scene06_CookMode.tsx · 5s · cook mode dark + timer
-      Scene07_Finished.tsx · 5s · Cooky happy + stars
-      Scene08_Library.tsx  · 5s · grille 8 recettes
-      Scene09_Outro.tsx    · 5s · CTA + wordmark + stores
+      Scene01_Intro.tsx    - 5s - Cooky + wordmark
+      Scene02_Feed.tsx     - 5s - scroll TikTok
+      Scene03_Share.tsx    - 4s - share sheet iOS
+      Scene04_Extraction.tsx - 5s - loader + 4 étapes
+      Scene05_Recipe.tsx   - 6s - fiche recette + ingrédients cascade
+      Scene06_CookMode.tsx - 5s - cook mode dark + timer
+      Scene07_Finished.tsx - 5s - Cooky happy + stars
+      Scene08_Library.tsx  - 5s - grille 8 recettes
+      Scene09_Outro.tsx    - 5s - CTA + wordmark + stores
   remotion.config.ts
   package.json
 ```
 
-## Timing (30 fps · total 750 frames · 25 s)
+## Timing (30 fps - total 750 frames - 25 s)
 
 | Scène | Frames | Durée |
 |---|--:|--:|
@@ -112,9 +112,9 @@ recommandée).
 
 ## Exports prévus
 
-- `let-me-cook-story.mp4` · 1080×1920 · Insta Story, TikTok, Reels, Shorts
-- `let-me-cook-square.mp4` · 1080×1080 · Feed Insta
-- (Futur) `let-me-cook-landscape.mp4` · 1920×1080 · YouTube, X, LinkedIn
+- `let-me-cook-story.mp4` - 1080×1920 - Insta Story, TikTok, Reels, Shorts
+- `let-me-cook-square.mp4` - 1080×1080 - Feed Insta
+- (Futur) `let-me-cook-landscape.mp4` - 1920×1080 - YouTube, X, LinkedIn
 
 
 ## Star History
