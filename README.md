@@ -6,7 +6,6 @@
 [![commits](https://img.shields.io/github/commit-activity/t/Adam-Blf/let-me-cook-story?color=001329&label=commits&style=flat-square)](https://github.com/Adam-Blf/let-me-cook-story/commits) [![visites](https://hits.sh/github.com/Adam-Blf/let-me-cook-story.svg?style=flat-square&label=visites&color=001329)](https://hits.sh/github.com/Adam-Blf/let-me-cook-story/) [![last commit](https://img.shields.io/github/last-commit/Adam-Blf/let-me-cook-story?color=D4A437&style=flat-square&label=dernier%20push)](https://github.com/Adam-Blf/let-me-cook-story/commits) [![top language](https://img.shields.io/github/languages/top/Adam-Blf/let-me-cook-story?style=flat-square)](https://github.com/Adam-Blf/let-me-cook-story) [![license](https://img.shields.io/github/license/Adam-Blf/let-me-cook-story?style=flat-square&color=D4A437)](LICENSE)
 <!-- adam-badges:end -->
 
-
 Teaser vidéo 25 s qui montre tout le parcours de l'app
 [Let Me Cook](https://github.com/Adam-Blf/let-me-cook). Cooky mascotte
 + Splash + Feed social + Share sheet + Extraction + Recipe + Cook mode
@@ -118,13 +117,6 @@ recommandée).
 - `let-me-cook-square.mp4` - 1080×1080 - Feed Insta
 - (Futur) `let-me-cook-landscape.mp4` - 1920×1080 - YouTube, X, LinkedIn
 
-
-## Star History
-
-<a href="https://www.star-history.com/?repos=Adam-Blf%2Flet-me-cook-story&type=date&legend=top-left">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=Adam-Blf/let-me-cook-story&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=Adam-Blf/let-me-cook-story&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=Adam-Blf/let-me-cook-story&type=date&legend=top-left" />
  </picture>
 </a>
